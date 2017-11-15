@@ -37,6 +37,27 @@ public class PartOne_view_1 extends View {
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeWidth(20);
 
-		canvas.drawCircle(300, 300, 200, paint);
+		int width = getWidth();
+		int height = getHeight();
+
+		//确定圆心位置
+		int x = width / 2 / 2+10;
+		int y = height / 2 / 2+30;
+		int r = Math.min(x, y) - 50;
+		if (r < 0) {
+			r = 0;
+		}
+
+		canvas.drawCircle(x, y, r, paint);
+
+		int x2 = width - x;
+		int y2 = y;
+		int r2 = r;
+
+		paint.reset();
+		paint.setStrokeWidth(60);
+		paint.setStyle(Paint.Style.STROKE);
+		paint.setARGB(100,100,100,100);
+		canvas.drawCircle(x2, y2, r2, paint);
 	}
 }
