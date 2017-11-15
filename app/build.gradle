@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -16,6 +16,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    greendao {
+        schemaVersion 1 //当前数据库版本
+        daoPackage 'com.sdk.paic.myandroidhomework.greendaoutils'
+        targetGenDir 'src/main/java'
     }
 }
 
@@ -36,4 +41,9 @@ dependencies {
     compile 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    compile 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
+    compile 'org.greenrobot:greendao:3.2.2'
+//    compile 'org.greenrobot:greendao:3.0.1'
+//    compile 'org.greenrobot:greendao-generator:3.0.0'
 }

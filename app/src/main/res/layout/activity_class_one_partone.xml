@@ -10,7 +10,32 @@
 
     <com.sdk.paic.myandroidhomework.classones.view.PartOne_view_1
         android:layout_width="match_parent"
-        android:background="@mipmap/ic_launcher"
-        android:layout_height="400dp"/>
+        android:visibility="gone"
+        android:layout_height="400dp"
+        android:background="@mipmap/ic_launcher"/>
 
+    <Button
+        android:id="@+id/btn_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加数据"/>
+
+    <Button
+        android:id="@+id/btn_query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查询数据"/>
+
+    <Button
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改数据"/>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:text="删除数据"/>
 </LinearLayout>
