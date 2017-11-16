@@ -4,6 +4,7 @@ import com.sdk.paic.myandroidhomework.MyApplication;
 import com.sdk.paic.myandroidhomework.entities.UserBean;
 
 import org.greenrobot.greendao.query.Query;
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -24,7 +25,7 @@ public class MyDbHelper {
 	}
 
 	private String DBNAME = "MyDB.db";
-	private String MY_KEY="fdfsdf123";
+	private String MY_KEY = "fdfsdf123";
 
 	private void initUserBeanDao() {
 		DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(MyApplication.mContext, DBNAME, null);
@@ -56,12 +57,18 @@ public class MyDbHelper {
 	}
 
 	public void update(UserBean userBeana) {
-
+//		"张三", "100", "100kg", "abc"
 		Query<UserBean> build =
-				userBeanDao.queryBuilder().where(UserBeanDao.Properties.Name.eq("1")).build();
+				userBeanDao.queryBuilder().where(UserBeanDao.Properties.Name.eq("张三"))
+//						.or(UserBeanDao.Properties.Name.eq("100"));
+//						.and(UserBeanDao.Properties.Abc.eq("abc"))
+//						.and(UserBeanDao.Properties.Weight.eq("100kg"))
+						.build();
+//		build.setParameter()
+//		build.list();
 		UserBean unique = build.unique();
 
-		String adb = unique.getName();
+//		String adb = unique.getName();
 
 	}
 
@@ -70,6 +77,14 @@ public class MyDbHelper {
 	}
 
 	public List<UserBean> check() {
-		return null;
+		QueryBuilder<UserBean> builder = userBeanDao.queryBuilder();//.orderCustom();
+//		builder.where(UserBeanDao.Properties.Name)
+
+		List<UserBean> list = builder.list();
+
+//		Query<UserBean> build =
+//				userBeanDao.queryBuilder().where(UserBeanDao.Properties.Name.eq("1")).build();
+//		List<UserBean> list = build.list();
+		return list;
 	}
 }

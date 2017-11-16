@@ -35,19 +35,19 @@ android {
         targetGenDir 'src/main/java'
     }
 
-    productFlavors {
-
-        vvv1 {
-
-        }
-        vvv2 {
-
-        }
-        vv3 {
-
-        }
-
-    }
+//    productFlavors {
+//
+//        vvv1 {
+//
+//        }
+//        vvv2 {
+//
+//        }
+//        vv3 {
+//
+//        }
+//
+//    }
 
     applicationVariants.all {
         variant ->
