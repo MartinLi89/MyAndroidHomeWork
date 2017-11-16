@@ -72,9 +72,9 @@ public class ClassOne_partone extends BaseActivity {
                 MyDbHelper instancess = MyDbHelper.getInstance();
                 List<UserBean> check = instancess.check();
 
-                Toast.makeText(ClassOne_partone.this, check.get(0).getName(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ClassOne_partone.this, check.get(0).getName(), Toast.LENGTH_SHORT).show();
                 for (UserBean userBean : check) {
-                    Log.e("userBean", userBean.getName());
+//                    Log.e("userBean", userBean.getName());
                 }
                 break;
             default:

@@ -16,14 +16,69 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        mytestdemo {
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
     }
     greendao {
         schemaVersion 1 //当前数据库版本
         daoPackage 'com.sdk.paic.myandroidhomework.greendaoutils'
         targetGenDir 'src/main/java'
     }
-}
 
+    productFlavors {
+
+        vvv1 {
+
+        }
+        vvv2 {
+
+        }
+        vv3 {
+
+        }
+
+    }
+
+    applicationVariants.all {
+        variant ->
+            variant.outputs.each { output ->
+                if (output.outputFile != null && output.outputFile.name.endsWith('.apk')
+//                        && 'release'.endsWith(variant.buildType.name)
+                ) {
+                    def flavorName = variant.flavorName
+//                    if ('release'.endsWith(variant.buildType.name)) {
+                    flavorName = flavorName + variant.buildType.name
+//                    } else {
+//                        flavorName = flavorName + "debug"
+//                    }
+
+
+                    def apkFile = new File(
+                            output.outputFile.getParent(),
+                            "这是一个demo_${flavorName}_v${variant.versionName}_${buildTime()}.apk")
+                    output.outputFile = apkFile
+
+
+                }
+            }
+
+    }
+}
+def buildTime() {
+    def date = new Date()
+    def dataTime = date.format('yyyyMMdd')
+    return dataTime
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
