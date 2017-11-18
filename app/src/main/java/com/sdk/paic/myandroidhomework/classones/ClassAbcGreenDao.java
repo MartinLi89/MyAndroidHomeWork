@@ -94,19 +94,28 @@ public class ClassAbcGreenDao extends AppCompatActivity
 				deleteAll();
 				break;
 			case R.id.btn_query:
-				MyDbHelper instancess = MyDbHelper.getInstance();
-				List<UserBean> check = instancess.checkOne(name, age, weight, abc);
-
-				for (UserBean userBeanaa : check) {
-					showToast(userBeanaa.getName() + "");
-				}
-
+				queryOne(name, age, weight, abc);
+				queryCount(name);
 				break;
 			case R.id.btn_control:
 				CrmGetDbtoSdcard.copyDBToSdcard(mContext, "MyDB.db");
 				break;
 			default:
 				break;
+		}
+	}
+
+	private void queryCount(String name) {
+		long l = MyDbHelper.getInstance().checkCount(name);
+		showToast(l + "");
+	}
+
+	private void queryOne(String name, String age, String weight, String abc) {
+		MyDbHelper instancess = MyDbHelper.getInstance();
+		List<UserBean> check = instancess.checkOne(name, age, weight, abc);
+
+		for (UserBean userBeanaa : check) {
+			showToast(userBeanaa.getName() + "");
 		}
 	}
 

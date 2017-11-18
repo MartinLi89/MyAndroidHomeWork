@@ -1,8 +1,12 @@
 package com.sdk.paic.myandroidhomework.greendaoutils;
 
+import android.text.style.BulletSpan;
+
 import com.sdk.paic.myandroidhomework.MyApplication;
 import com.sdk.paic.myandroidhomework.entities.UserBean;
 
+import org.greenrobot.greendao.database.Database;
+import org.greenrobot.greendao.query.CountQuery;
 import org.greenrobot.greendao.query.DeleteQuery;
 import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -29,8 +33,12 @@ public class MyDbHelper {
 	private String MY_KEY = "fdfsdf123";
 
 	private void initUserBeanDao() {
-		DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(MyApplication.mContext, DBNAME, null);
-		DaoMaster daoMaster = new DaoMaster(devOpenHelper.getEncryptedWritableDb(MY_KEY));
+
+		MySQLiteOpenHelper devOpenHelper = new MySQLiteOpenHelper(MyApplication.mContext, DBNAME, null);
+
+//		DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(MyApplication.mContext, DBNAME, null);
+		Database encryptedWritableDb = devOpenHelper.getEncryptedWritableDb(MY_KEY);
+		DaoMaster daoMaster = new DaoMaster(encryptedWritableDb);
 		userBeanDao = daoMaster.newSession().getUserBeanDao();
 	}
 
@@ -92,7 +100,10 @@ public class MyDbHelper {
 						UserBeanDao.Properties.Weight.eq(userBean.getWeight()),
 						UserBeanDao.Properties.Abc.eq(userBean.getAbc()))
 				.orderAsc(UserBeanDao.Properties.Weight);
-		List<UserBean> list = queryBuilder.build().list();
+
+//queryBuilder.buildDelete().executeDeleteWithoutDetachingEntities();
+		Query<UserBean> build = queryBuilder.build();
+		List<UserBean> list = build.list();
 		for (UserBean bean : list) {
 
 			userBeanDao.delete(bean);
@@ -107,17 +118,31 @@ public class MyDbHelper {
 
 	public List<UserBean> checkOne(String name, String age, String weight, String abc) {
 //		"张三", "100", "100kg", "abc"
-		QueryBuilder<UserBean> queryBuilder = userBeanDao
-				.queryBuilder()
-				.where(
-//						UserBeanDao.Properties.Name.eq(name),
-						UserBeanDao.Properties.Age.eq(age),
-						UserBeanDao.Properties.Weight.eq(weight),
-						UserBeanDao.Properties.Abc.eq(abc))
-				.orderAsc(UserBeanDao.Properties.Weight);
+		QueryBuilder<UserBean> builder = userBeanDao
+				.queryBuilder();
+		QueryBuilder<UserBean> queryBuilder = builder
+				.where(UserBeanDao.Properties.Name.eq(name)
+//						UserBeanDao.Properties.Age.eq(age),
+//						UserBeanDao.Properties.Weight.eq(weight),
+//						UserBeanDao.Properties.Abc.eq(abc)
+//						, builder.or(UserBeanDao.Properties.Age.eq("李四"), UserBeanDao.Properties.Age.eq("李四"))
+//						, builder.and(UserBeanDao.Properties.Age.eq("李四"), UserBeanDao.Properties.Age.eq("李四"))
+				).orderAsc(UserBeanDao.Properties.Weight);
 
-		List<UserBean> list = queryBuilder.build().list();
+		Query<UserBean> build = queryBuilder.build();
+
+		queryBuilder.count();
+
+		List<UserBean> list = build.list();
 		return list;
+	}
+
+	public long checkCount(String name) {
+		QueryBuilder<UserBean> queryBuilder = userBeanDao.queryBuilder();
+		queryBuilder.where(UserBeanDao.Properties.Name.eq(name));
+		CountQuery<UserBean> buildCount = queryBuilder.buildCount();
+		long count = buildCount.count();
+		return count;
 	}
 
 
