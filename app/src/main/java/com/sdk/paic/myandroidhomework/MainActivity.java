@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.sdk.paic.myandroidhomework.classones.ClassAbcGreenDao;
 import com.sdk.paic.myandroidhomework.classones.ClassOne_partone;
 
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class MainActivity extends BaseActivity {
 	RecyclerView rlistView;
 
 	private String[] selectors = new String[]{
-			"第一课",
-			"第二课",
+			"第一课 画圆",
+			"第二课 greendao",
 			"第二课",
 			"第二课",
 			"第二课",
@@ -65,6 +66,9 @@ public class MainActivity extends BaseActivity {
 		Toast.makeText(MainActivity.this, "点击了第" + childAdapterPosition + "个", Toast.LENGTH_SHORT).show();
 		if (childAdapterPosition == 0) {
 			startActivity(new Intent(this, ClassOne_partone.class));
+		} else if (childAdapterPosition == 1) {
+			startActivity(new Intent(this, ClassAbcGreenDao.class));
+
 		}
 
 	}

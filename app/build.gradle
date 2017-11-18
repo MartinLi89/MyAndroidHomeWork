@@ -74,21 +74,23 @@ android {
 
     }
 }
+
 def buildTime() {
     def date = new Date()
     def dataTime = date.format('yyyyMMdd')
     return dataTime
 }
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha6'
+
+    //    compile 'org.greenrobot:greendao:3.0.1'
+    //    compile 'org.greenrobot:greendao-generator:3.0.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
-//    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha6'
-    testCompile 'junit:junit:4.12'
-
-
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -96,9 +98,9 @@ dependencies {
     compile 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
     compile 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
     compile 'org.greenrobot:greendao:3.2.2'
-//    compile 'org.greenrobot:greendao:3.0.1'
-//    compile 'org.greenrobot:greendao-generator:3.0.0'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
 }

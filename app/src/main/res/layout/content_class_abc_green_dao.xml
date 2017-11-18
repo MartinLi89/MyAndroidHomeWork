@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="复制数据库"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="名字"/>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="年龄"/>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="体重"/>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="abc"/>
+
+            </TableRow>
+
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:hint="name"
+                    android:text="张三"/>
+
+                <EditText
+                    android:id="@+id/et_age"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:hint="age"
+                    android:text="23"/>
+
+                <EditText
+                    android:id="@+id/et_weight"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:hint="weight"
+                    android:text="120"/>
+
+                <EditText
+                    android:id="@+id/et_abc"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:hint="abc"
+                    android:text="180"/>
+            </TableRow>
+        </TableLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加数据"/>
+
+    <Button
+        android:id="@+id/btn_query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查询数据"/>
+
+    <Button
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改数据"/>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:text="删除数据"/>
+</LinearLayout>

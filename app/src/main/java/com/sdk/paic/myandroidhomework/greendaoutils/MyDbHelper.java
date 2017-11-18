@@ -3,6 +3,7 @@ package com.sdk.paic.myandroidhomework.greendaoutils;
 import com.sdk.paic.myandroidhomework.MyApplication;
 import com.sdk.paic.myandroidhomework.entities.UserBean;
 
+import org.greenrobot.greendao.query.DeleteQuery;
 import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.query.QueryBuilder;
 
@@ -58,23 +59,67 @@ public class MyDbHelper {
 
 	public void update(UserBean userBeana) {
 //		"张三", "100", "100kg", "abc"
-		Query<UserBean> build =
-				userBeanDao.queryBuilder().where(UserBeanDao.Properties.Name.eq("张三"))
+
+		QueryBuilder<UserBean> builder = userBeanDao.queryBuilder();
+		builder.where(UserBeanDao.Properties.Name.eq(userBeana.getName()));
 //						.or(UserBeanDao.Properties.Name.eq("100"));
 //						.and(UserBeanDao.Properties.Abc.eq("abc"))
 //						.and(UserBeanDao.Properties.Weight.eq("100kg"))
-						.build();
+//						.build();
 //		build.setParameter()
 //		build.list();
-		UserBean unique = build.unique();
+//		UserBean unique = builder.unique();
+//		if (unique == null) {
+//			return;
+//		}
+		List<UserBean> list = builder.list();
+		for (UserBean userBean : list) {
+			userBean.setName("李四");
+		}
+		userBeanDao.updateInTx(list);
+
 
 //		String adb = unique.getName();
 
 	}
 
 	public void delete(UserBean userBean) {
+		QueryBuilder<UserBean> queryBuilder = userBeanDao
+				.queryBuilder()
+				.where(
+						UserBeanDao.Properties.Name.eq(userBean.getName()),
+						UserBeanDao.Properties.Age.eq(userBean.getAge()),
+						UserBeanDao.Properties.Weight.eq(userBean.getWeight()),
+						UserBeanDao.Properties.Abc.eq(userBean.getAbc()))
+				.orderAsc(UserBeanDao.Properties.Weight);
+		List<UserBean> list = queryBuilder.build().list();
+		for (UserBean bean : list) {
+
+			userBeanDao.delete(bean);
+		}
+
+//		DeleteQuery<UserBean> deleteQuery = userBeanDao.queryBuilder()
+//				.where(UserBeanDao.Properties.Name.eq(userBean.getName()))
+//				.buildDelete();
 
 	}
+
+
+	public List<UserBean> checkOne(String name, String age, String weight, String abc) {
+//		"张三", "100", "100kg", "abc"
+		QueryBuilder<UserBean> queryBuilder = userBeanDao
+				.queryBuilder()
+				.where(
+//						UserBeanDao.Properties.Name.eq(name),
+						UserBeanDao.Properties.Age.eq(age),
+						UserBeanDao.Properties.Weight.eq(weight),
+						UserBeanDao.Properties.Abc.eq(abc))
+				.orderAsc(UserBeanDao.Properties.Weight);
+
+		List<UserBean> list = queryBuilder.build().list();
+		return list;
+	}
+
 
 	public List<UserBean> check() {
 		QueryBuilder<UserBean> builder = userBeanDao.queryBuilder();//.orderCustom();
@@ -86,5 +131,10 @@ public class MyDbHelper {
 //				userBeanDao.queryBuilder().where(UserBeanDao.Properties.Name.eq("1")).build();
 //		List<UserBean> list = build.list();
 		return list;
+	}
+
+	public void deleteAll() {
+		userBeanDao.deleteAll();
+
 	}
 }
